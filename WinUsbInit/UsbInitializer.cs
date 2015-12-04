@@ -12,12 +12,14 @@ namespace WinUsbInit
             return
                 DriveInfo.GetDrives()
                     .SingleOrDefault(
-                        d => d.IsReady && d.VolumeLabel == volumeLabel && d.DriveType == DriveType.Removable);
+                        d =>
+                            d.IsReady && d.VolumeLabel.Equals(volumeLabel, StringComparison.InvariantCultureIgnoreCase) &&
+                            d.DriveType == DriveType.Removable);
         }
 
         public void RenameDrive(DriveInfo drive, string label)
         {
-            throw new NotImplementedException();
+            drive.VolumeLabel = label;
         }
     }
 }

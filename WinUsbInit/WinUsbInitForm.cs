@@ -24,15 +24,18 @@ namespace WinUsbInit
 
         public void DeviceInserted()
         {
-            var label = _config.GetInitialVolumeLabel();
-            AddLog($"Device inserted, searching for drive with label '{label}'...");
-            var drive = _usbInitializer.FindUsbDrive(label);
+            var searchLabel = _config.GetInitialVolumeLabel();
+            AddLog($"Device inserted, searching for drive with label '{searchLabel}'");
+            var drive = _usbInitializer.FindUsbDrive(searchLabel);
             if (drive == null)
             {
                 AddLog("No drive found!");
                 return;
             }
-            AddLog($"Drive found: {drive.Name}");
+
+            var newLabel = _config.GetNewVolumeLabel();
+            AddLog($"Changing drive {drive.Name} label to '{newLabel}'");
+            _usbInitializer.RenameDrive(drive, newLabel);
         }
 
         private void AddLog(string msg)
