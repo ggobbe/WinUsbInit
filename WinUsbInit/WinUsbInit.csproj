@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Contracts\IConfig.cs" />
+    <Compile Include="Contracts\IUsbInitializer.cs" />
     <Compile Include="DeviceArrivalListener.cs" />
     <Compile Include="UsbInitializer.cs" />
     <Compile Include="WinUsbInitForm.cs">
