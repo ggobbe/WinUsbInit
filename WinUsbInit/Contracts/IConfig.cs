@@ -2,7 +2,8 @@
 {
     internal interface IConfig
     {
-        string GetVolumeLabel();
+        string GetInitialVolumeLabel();
+        string GetNewVolumeLabel();
         string GetSourceFilesDir();
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
+// ReSharper disable InconsistentNaming
+
 namespace WinUsbInit
 {
     internal class DeviceArrivalListener : NativeWindow
@@ -19,13 +21,13 @@ namespace WinUsbInit
         }
 
         // Listen for the control's window creation and then hook into it.
-        internal void OnHandleCreated(object sender, EventArgs e)
+        private void OnHandleCreated(object sender, EventArgs e)
         {
             // Window is now created, assign handle to NativeWindow.
             AssignHandle(((WinUsbInitForm) sender).Handle);
         }
 
-        internal void OnHandleDestroyed(object sender, EventArgs e)
+        private void OnHandleDestroyed(object sender, EventArgs e)
         {
             // Window was destroyed, release hook.
             ReleaseHandle();

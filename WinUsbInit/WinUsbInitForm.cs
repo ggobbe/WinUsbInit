@@ -1,22 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinUsbInit.Contracts;
 
 namespace WinUsbInit
 {
     public partial class WinUsbInitForm : Form
     {
-        private DeviceArrivalListener _deviceArrivalListener;
+        private readonly IConfig _config;
+
+        private readonly DeviceArrivalListener _deviceArrivalListener;
+        private readonly IUsbInitializer _usbInitializer;
 
         public WinUsbInitForm()
         {
             InitializeComponent();
+            _usbInitializer = new UsbInitializer();
+            _config = new Config();
+
             AddLog("Starting listener...");
             _deviceArrivalListener = new DeviceArrivalListener(this);
             AddLog("Listener started!");
@@ -24,14 +24,22 @@ namespace WinUsbInit
 
         public void DeviceInserted()
         {
-            AddLog("Device inserted");
+            var label = _config.GetInitialVolumeLabel();
+            AddLog($"Device inserted, searching for drive with label '{label}'...");
+            var drive = _usbInitializer.FindUsbDrive(label);
+            if (drive == null)
+            {
+                AddLog("No drive found!");
+                return;
+            }
+            AddLog($"Drive found: {drive.Name}");
         }
 
-        public void AddLog(string msg)
+        private void AddLog(string msg)
         {
             var time = DateTime.Now.ToLongTimeString();
-            var log = $"{time} {msg}";
-            outputBox.Text += $"{log}\n";
+            var log = $"{time}: {msg}";
+            outputBox.AppendText($"{log}\n");
         }
     }
 }

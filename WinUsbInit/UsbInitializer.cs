@@ -7,11 +7,12 @@ namespace WinUsbInit
 {
     internal class UsbInitializer : IUsbInitializer
     {
-        public DriveInfo FindUsbDrive()
+        public DriveInfo FindUsbDrive(string volumeLabel)
         {
             return
                 DriveInfo.GetDrives()
-                    .FirstOrDefault(d => d.IsReady && d.VolumeLabel == "" && d.DriveType == DriveType.Removable);
+                    .SingleOrDefault(
+                        d => d.IsReady && d.VolumeLabel == volumeLabel && d.DriveType == DriveType.Removable);
         }
 
         public void RenameDrive(DriveInfo drive, string label)
