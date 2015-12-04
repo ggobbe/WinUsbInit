@@ -35,6 +35,7 @@
             // 
             this.outputBox.BackColor = System.Drawing.Color.Black;
             this.outputBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBox.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputBox.ForeColor = System.Drawing.Color.Lime;
             this.outputBox.Location = new System.Drawing.Point(0, 0);
             this.outputBox.Name = "outputBox";
