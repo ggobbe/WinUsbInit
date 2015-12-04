@@ -56,10 +56,17 @@ namespace WinUsbInit
             // Remove drive
             WriteLog($"Removing drive {drive.Name} safely");
             var removed = await Task.Run(() => _usbInitializer.EjectDrive(drive));
+            for (var i = 0; i < 4; i++)
+            {
+                Console.Beep(800,500);
+            }
             WriteLog(removed
                 ? "Please insert another USB drive to initialize..."
                 : $"Error whilst removing drive {drive.Name}...", removed ? _infoColor : _errorColor);
-        }
+            
+            
+       
+    }
 
         private void WriteLog(string msg, Color? color = null)
         {
