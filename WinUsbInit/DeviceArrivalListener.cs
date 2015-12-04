@@ -9,9 +9,8 @@ namespace WinUsbInit
 {
     class DeviceArrivalListener : NativeWindow
     {
-        // Constant value was found in the "windows.h" header file.
-        private const int WM_DEVICECHANGE = 537;
-
+        // Constant values was found in the "windows.h" header file.
+        private const int WM_DEVICECHANGE = 0x219;
         private const int DBT_DEVICEARRIVAL = 0x8000;
 
         private readonly WinUsbInitForm _parent;
