@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinUsbInit.Contracts;
 
@@ -22,7 +23,7 @@ namespace WinUsbInit
             _deviceArrivalListener = new DeviceArrivalListener(this);
         }
 
-        public void DeviceInserted()
+        public async Task DeviceInserted()
         {
             // Search drive with default label
             var searchLabel = _config.GetInitialVolumeLabel();
@@ -45,13 +46,13 @@ namespace WinUsbInit
             WriteLog($"Copying files to drive {drive.Name}");
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-            var copiedCount = _usbInitializer.CopyFiles(sourceDir, drive);
+            var copiedCount = await Task.Run(() => _usbInitializer.CopyFiles(sourceDir, drive));
             stopWatch.Stop();
             WriteLog($"{copiedCount} file(s) copied to {drive.Name} in {stopWatch.Elapsed}");
 
             // Remove drive
             WriteLog($"Removing drive {drive.Name} safely");
-            var removed = _usbInitializer.EjectDrive(drive);
+            var removed = await Task.Run(() => _usbInitializer.EjectDrive(drive));
             WriteLog(removed
                 ? "Please insert another USB drive to initialize..."
                 : $"Error whilst removing drive {drive.Name}...");
