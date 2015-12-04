@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceArrivalListener.cs" />
     <Compile Include="WinUsbInitForm.cs">
       <SubType>Form</SubType>
     </Compile>
