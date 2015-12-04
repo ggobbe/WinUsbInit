@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WinUsbInitForm));
             this.outputBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 529);
             this.Controls.Add(this.outputBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WinUsbInitForm";
             this.Text = "WinUsbInit";
             this.ResumeLayout(false);
