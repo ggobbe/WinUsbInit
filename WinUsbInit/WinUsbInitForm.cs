@@ -49,6 +49,7 @@ namespace WinUsbInit
             stopWatch.Stop();
             WriteLog($"{copiedCount} file(s) copied to {drive.Name} in {stopWatch.Elapsed}");
 
+            // Remove drive
             WriteLog($"Removing drive {drive.Name} safely");
             var removed = _usbInitializer.EjectDrive(drive);
             WriteLog(removed
