@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WinUsbInit
 {
-    public partial class Form1 : Form
+    public partial class WinUsbInitForm : Form
     {
-        public Form1()
+        public WinUsbInitForm()
         {
             InitializeComponent();
         }

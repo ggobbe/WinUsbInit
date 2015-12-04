@@ -1,6 +1,6 @@
 ﻿namespace WinUsbInit
 {
-    partial class Form1
+    partial class WinUsbInitForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,12 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.outputBox = new System.Windows.Forms.RichTextBox();
+            this.SuspendLayout();
+            // 
+            // outputBox
+            // 
+            this.outputBox.BackColor = System.Drawing.Color.Black;
+            this.outputBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBox.ForeColor = System.Drawing.Color.Lime;
+            this.outputBox.Location = new System.Drawing.Point(0, 0);
+            this.outputBox.Name = "outputBox";
+            this.outputBox.ReadOnly = true;
+            this.outputBox.Size = new System.Drawing.Size(1006, 529);
+            this.outputBox.TabIndex = 0;
+            this.outputBox.Text = "";
+            // 
+            // WinUsbInitForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1006, 529);
+            this.Controls.Add(this.outputBox);
+            this.Name = "WinUsbInitForm";
+            this.Text = "WinUsbInit";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.RichTextBox outputBox;
     }
 }
 
