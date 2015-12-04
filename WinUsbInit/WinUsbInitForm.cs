@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WinUsbInit.Contracts;
@@ -9,9 +10,11 @@ namespace WinUsbInit
     public partial class WinUsbInitForm : Form
     {
         private readonly IConfig _config;
-
         private readonly DeviceArrivalListener _deviceArrivalListener;
+        private readonly Color _errorColor = Color.Red;
+        private readonly Color _infoColor = Color.Aqua;
         private readonly IUsbInitializer _usbInitializer;
+
 
         public WinUsbInitForm()
         {
@@ -31,8 +34,8 @@ namespace WinUsbInit
             var drive = _usbInitializer.FindUsbDrive(searchLabel);
             if (drive == null)
             {
-                WriteLog($"No device found with label '{searchLabel}'.");
-                WriteLog("Please insert another USB drive to initialize...");
+                WriteLog($"No device found with label '{searchLabel}'.", _errorColor);
+                WriteLog("Please insert another USB drive to initialize...", _infoColor);
                 return;
             }
 
@@ -55,14 +58,24 @@ namespace WinUsbInit
             var removed = await Task.Run(() => _usbInitializer.EjectDrive(drive));
             WriteLog(removed
                 ? "Please insert another USB drive to initialize..."
-                : $"Error whilst removing drive {drive.Name}...");
+                : $"Error whilst removing drive {drive.Name}...", removed ? _infoColor : _errorColor);
         }
 
-        private void WriteLog(string msg)
+        private void WriteLog(string msg, Color? color = null)
         {
+            var length = outputBox.TextLength;
             var time = DateTime.Now.ToLongTimeString();
             var log = $"{time}: {msg}";
             outputBox.AppendText($"{log}\n");
+
+            if (color.HasValue)
+            {
+                outputBox.SelectionStart = length;
+                outputBox.SelectionLength = log.Length;
+                outputBox.SelectionColor = color.Value;
+                outputBox.SelectionLength = 0;
+                outputBox.SelectionStart = outputBox.TextLength;
+            }
         }
     }
 }
