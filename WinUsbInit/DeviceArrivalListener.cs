@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WinUsbInit
 {
-    class DeviceArrivalListener : NativeWindow
+    internal class DeviceArrivalListener : NativeWindow
     {
         // Constant values was found in the "windows.h" header file.
         private const int WM_DEVICECHANGE = 0x219;
@@ -26,7 +22,7 @@ namespace WinUsbInit
         internal void OnHandleCreated(object sender, EventArgs e)
         {
             // Window is now created, assign handle to NativeWindow.
-            AssignHandle(((WinUsbInitForm)sender).Handle);
+            AssignHandle(((WinUsbInitForm) sender).Handle);
         }
 
         internal void OnHandleDestroyed(object sender, EventArgs e)
